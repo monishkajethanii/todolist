@@ -6,6 +6,7 @@ import {
   faCalendarWeek,
 } from "@fortawesome/free-solid-svg-icons";
 import Fetch from "../../Fetch";
+
 function Home() {
   const [isVisible, setIsVisible] = useState(false);
   const [data, setData] = useState([]);
@@ -16,19 +17,22 @@ function Home() {
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
   };
-
-  useEffect(()=>{
-    fetchTasks();
-  },[])
+  
   const fetchTasks = async () => {
     try {
-      const response = await fetch('/api/cats');
+      const response = await fetch("/api/cats");
       const data = await response.json();
       setData(data);
+      console.log(data)
     } catch (error) {
-      console.error('Error fetching tasks:', error);
+      console.error("Error fetching tasks:", error);
     }
   };
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -48,7 +52,6 @@ function Home() {
       if (contentType && contentType.includes("application/json")) {
         const result = await response.json();
         if (response.ok) {
-          console.log(result.message);
           const updatedResponse = await fetch("/api/cats");
           const updatedData = await updatedResponse.json();
           setData(updatedData);
@@ -57,7 +60,7 @@ function Home() {
         }
       } else {
         const errorText = await response.text();
-        console.error("Unexpected response format:", errorText);
+        //console.error("Unexpected response format:", errorText);
       }
     } catch (error) {
       console.error("Error adding:", error);
@@ -66,6 +69,25 @@ function Home() {
     setTaskTitle("");
     setTaskDesc("");
     fetchTasks();
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch(`/api/cats?id=${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        console.log("Deleted successfully");
+        fetchTasks();
+      } else {
+        console.error("Failed to delete", await response.json());
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -107,9 +129,7 @@ function Home() {
           <a className="inline pl-3">My Projects</a>
         </div>
         <div>
-          <ul>
-            <Fetch data={data}/>
-          </ul>
+          <Fetch data={data} onDelete={handleDelete} />
         </div>
       </div>
       <div className="w-3/5">
