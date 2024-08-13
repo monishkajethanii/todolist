@@ -1,3 +1,39 @@
+# Task Management App
+
+## Overview
+
+This project is a task management application that allows users to add, delete, and view tasks. It is built using React for the front end and Node.js with MySQL for the back end.
+
+## Table of Contents
+
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Prerequisites
+
+Before you begin, ensure you have met the following requirements:
+
+- **Git**: Make sure Git is installed on your machine. You can download it from [Git's official website](https://git-scm.com/downloads).
+- **Node.js**: Ensure that Node.js is installed. You can download it from [Node.js official website](https://nodejs.org/).
+- **MySQL**: You need a MySQL database server running. You can download it from [MySQL official website](https://dev.mysql.com/downloads/).
+
+## Installation
+
+Follow these steps to set up your local development environment:
+1. **Clone the Repository**
+
+   Open your terminal and run:
+
+   ```bash
+   git clone https://github.com/your-username/your-repo.git
+
+2. create database db (in mysql- phpMyAdmin)
+3. Import todo.sql (available in my repo) in phpMyAdmin (xampp-mysql) to make database available to you
+4. run development server "npm run dev"
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
