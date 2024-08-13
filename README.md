@@ -1,4 +1,4 @@
-# Task Management App
+# Todo List in Next JS
 
 ## Overview
 
