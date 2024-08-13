@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project is a task management application that allows users to add, delete, and view tasks. It is built using React for the front end and Node.js with MySQL for the back end.
+This project is a task management application that allows users to add, delete, and view tasks. It is built using Next for the front end and Node.js with MySQL for the back end.
 
 ## Table of Contents
 
