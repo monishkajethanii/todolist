@@ -6,6 +6,7 @@ import {
   faCalendarWeek,
 } from "@fortawesome/free-solid-svg-icons";
 import Fetch from "../../Fetch";
+import Download from "./Download";
 
 function Home() {
   const [isVisible, setIsVisible] = useState(false);
@@ -17,13 +18,13 @@ function Home() {
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
   };
-  
+
   const fetchTasks = async () => {
     try {
       const response = await fetch("/api/cats");
       const data = await response.json();
       setData(data);
-      console.log(data)
+      console.log(data);
     } catch (error) {
       console.error("Error fetching tasks:", error);
     }
@@ -130,6 +131,7 @@ function Home() {
         </div>
         <div>
           <Fetch data={data} onDelete={handleDelete} />
+          <Download data={data}/>
         </div>
       </div>
       <div className="w-3/5">
@@ -141,40 +143,48 @@ function Home() {
         </p>
         <hr />
         {isVisible && (
-          <div className="flex flex-col space-y-4 p-4 w-3/5" id="task">
-            <input
-              type="text"
-              placeholder="Task No"
-              value={taskNo}
-              onChange={(e) => setTaskNo(e.target.value)}
-              className="border-2 border-gray-500 text-center"
-              required
-            />
-            <input
-              type="text"
-              placeholder="Task title"
-              value={taskTitle}
-              onChange={(e) => setTaskTitle(e.target.value)}
-              className="border-2 border-gray-500 text-center"
-              required
-            />
-            <input
-              type="text"
-              placeholder="Task Description"
-              value={taskDesc}
-              onChange={(e) => setTaskDesc(e.target.value)}
-              className="border-2 border-gray-500 text-center"
-              required
-            />
-            <button
-              type="submit"
-              onClick={handleSubmit}
-              className="border-2 border-red-600 bg-red-500 w-[100px] rounded-lg font-bold text-center"
-            >
-              Add
-            </button>
+          <div
+            className="flex flex-col p-4 bg-yellow-50 justify-center items-center min-h-screen"
+            id="task"
+          >
+            <div className="bg-gray-500 shadow-2xl w-full max-w-md p-4 rounded-lg flex flex-col space-y-4 items-center h-full">
+              <div className="bg-white w-full p-4 rounded-lg flex flex-col space-y-4">
+                <input
+                  type="text"
+                  placeholder="Task No"
+                  value={taskNo}
+                  onChange={(e) => setTaskNo(e.target.value)}
+                  className="border border-gray-500 text-center rounded-lg p-2 w-full"
+                  required
+                />
+                <input
+                  type="text"
+                  placeholder="Task Title"
+                  value={taskTitle}
+                  onChange={(e) => setTaskTitle(e.target.value)}
+                  className="border border-gray-500 text-center rounded-lg p-2 w-full"
+                  required
+                />
+                <input
+                  type="text"
+                  placeholder="Task Description"
+                  value={taskDesc}
+                  onChange={(e) => setTaskDesc(e.target.value)}
+                  className="border border-gray-500 text-center rounded-lg p-2 w-full"
+                  required
+                />
+                <button
+                  type="submit"
+                  onClick={handleSubmit}
+                  className="border-2 border-red-600 bg-red-500 text-white rounded-lg py-2 w-full font-bold hover:bg-red-600 transition duration-300"
+                >
+                  Add
+                </button>
+              </div>
+            </div>
           </div>
         )}
+
         <hr />
         <FontAwesomeIcon icon={faPlus} className="pl-3 pt-5 text-red-500" />
         <button
